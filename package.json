@@ -34,7 +34,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-electron": "^0.28.6",
-    "vite-plugin-electron-renderer": "^0.14.5"
+    "vite-plugin-electron-renderer": "^0.14.5",
+    "vite-tsconfig-paths": "^4.3.2"
   },
   "main": "dist-electron/main.js"
 }

@@ -18,7 +18,14 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Import settings */
+    "baseUrl": ".",
+    "paths": {
+      "@client/*": ["src/*"],
+      "@server/*": ["electron/*"]
+    }
   },
   "include": ["src", "electron"],
   "references": [{ "path": "./tsconfig.node.json" }]
