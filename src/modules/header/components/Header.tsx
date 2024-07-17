@@ -1,8 +1,4 @@
-import {
-  InputFileLocation,
-  InputSearch,
-  Title,
-} from "@client/modules/header/components";
+import { SearchForm, Title } from "@client/modules/header/components";
 import { Card } from "@mantine/core";
 
 export const Header = () => {
@@ -13,8 +9,7 @@ export const Header = () => {
       className="flex flex-col items-center justify-center gap-4"
     >
       <Title />
-      <InputSearch />
-      <InputFileLocation />
+      <SearchForm />
     </Card>
   );
 };

@@ -5,10 +5,9 @@ export const InputFileLocation = () => {
   return (
     <Tooltip position="bottom" withArrow label="Change file save location">
       <TextInput
-        w="50%"
         placeholder="Paste video id or url here..."
         readOnly
-        className="cursor-pointer"
+        className="w-1/2 cursor-pointer min-w-60"
         styles={{
           input: {
             cursor: "pointer",
