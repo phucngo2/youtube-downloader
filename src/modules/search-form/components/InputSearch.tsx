@@ -1,4 +1,4 @@
-import { ISearchForm } from "@client/modules/header/types";
+import { ISearchForm } from "@client/modules/search-form/types";
 import { ActionIcon, rem, TextInput } from "@mantine/core";
 import { UseFormReturnType } from "@mantine/form";
 import { IconSearch, IconSend } from "@tabler/icons-react";

@@ -1,18 +1,17 @@
 import {
   InputFileLocation,
   InputSearch,
-} from "@client/modules/header/components";
-import { SEARCH_FORM_INITIAL_VALUES } from "@client/modules/header/config";
-import { ISearchForm } from "@client/modules/header/types";
+} from "@client/modules/search-form/components";
+import { SEARCH_FORM_CONFIG } from "@client/modules/search-form/config";
+import { sendSearchEvent } from "@client/modules/search-form/handlers";
+import { ISearchForm } from "@client/modules/search-form/types";
 import { useForm } from "@mantine/form";
 
 export const SearchForm = () => {
-  const form = useForm<ISearchForm>({
-    initialValues: SEARCH_FORM_INITIAL_VALUES,
-  });
+  const form = useForm<ISearchForm>(SEARCH_FORM_CONFIG);
 
   const handleSubmit = (values: ISearchForm) => {
-    console.log(values);
+    sendSearchEvent(values.keyword);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { Card } from "@mantine/core";
 import "./App.css";
 import { Layout } from "@client/components";
-import { Header } from "@client/modules/header/components";
+import { Header } from "@client/modules/search-form/components";
 
 function App() {
   return (
