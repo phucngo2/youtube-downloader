@@ -1,17 +1,21 @@
+import { theme } from "@client/config";
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-// core styles are required for all packages
-import { theme } from "@client/config";
-import { MantineProvider } from "@mantine/core";
-import "@mantine/core/styles.css";
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MantineProvider defaultColorScheme="dark" theme={theme}>
-      <App />
-    </MantineProvider>
+    <QueryClientProvider client={queryClient}>
+      <MantineProvider defaultColorScheme="dark" theme={theme}>
+        <App />
+      </MantineProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
