@@ -1,0 +1,11 @@
+.scrollbar-stable {
+  scrollbar-gutter: stable;
+}
+
+.app-container {
+  min-height: 520px;
+}
+
+.top-container {
+  min-height: 180px;
+}

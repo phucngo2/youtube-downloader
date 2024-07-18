@@ -6,7 +6,7 @@ export const Header = () => {
     <Card
       shadow="xs"
       padding="lg"
-      className="flex flex-col items-center justify-center gap-4"
+      className="flex flex-col items-center justify-center gap-4 app-container top-container"
     >
       <Title />
       <SearchForm />
