@@ -12,7 +12,7 @@ export const VideoTags = () => {
         className="flex flex-row flex-wrap w-full gap-2.5"
       >
         {videoInfo?.keywords?.map((item) => (
-          <Badge key="item" tt="none" variant="light">
+          <Badge key={item} tt="none" variant="light">
             {item}
           </Badge>
         ))}
