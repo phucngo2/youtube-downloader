@@ -1,4 +1,5 @@
 import { videoInfoAtom } from "@client/stores";
+import { Title } from "@mantine/core";
 import { useAtomValue } from "jotai";
 
 export const VideoPlayer = () => {
@@ -12,6 +13,9 @@ export const VideoPlayer = () => {
         allowFullScreen
         src={videoInfo?.embedUrl}
       ></iframe>
+      <Title order={5} mt={8}>
+        {videoInfo?.title}
+      </Title>
     </div>
   );
 };
