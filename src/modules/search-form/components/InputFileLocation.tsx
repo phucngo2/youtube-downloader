@@ -20,7 +20,7 @@ export const InputFileLocation = () => {
           />
         }
         rightSection={
-          <ActionIcon color="grape" className="cursor-pointer">
+          <ActionIcon color="violet" className="cursor-pointer">
             <IconDownload
               style={{ width: rem(16), height: rem(16) }}
               stroke={2.5}

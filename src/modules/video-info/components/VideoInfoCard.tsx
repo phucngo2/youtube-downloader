@@ -1,16 +1,15 @@
-import { videoInfoAtom } from "@client/stores";
-import { Card, Title } from "@mantine/core";
-import { useAtomValue } from "jotai";
+import { VideoDetail } from "@client/modules/video-info/components";
+import { Card } from "@mantine/core";
 
 export const VideoInfoCard = () => {
-  const videoInfo = useAtomValue(videoInfoAtom);
   return (
     <Card
       shadow="xs"
       padding="lg"
-      className="flex-1 overflow-y-auto scrollbar-stable bottom-container"
+      withBorder
+      className="flex-1 gap-8 overflow-y-auto scrollbar-stable bottom-container"
     >
-      <Title order={5}>{videoInfo?.title}</Title>
+      <VideoDetail />
     </Card>
   );
 };
