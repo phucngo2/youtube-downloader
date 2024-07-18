@@ -5,3 +5,4 @@ export * from "./VideoInfoCard";
 export * from "./VideoInforTitle";
 export * from "./VideoPlayer";
 export * from "./VideoTags";
+export * from "./VideoTagsEmpty";
