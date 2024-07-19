@@ -1,4 +1,7 @@
-import { VideoTagsEmpty } from "@client/modules/video-info/components";
+import {
+  VideoTagsCopy,
+  VideoTagsEmpty,
+} from "@client/modules/video-info/components";
 import { videoInfoAtom } from "@client/stores";
 import { Badge, Paper } from "@mantine/core";
 import { useAtomValue } from "jotai";
@@ -11,15 +14,15 @@ export const VideoTags = () => {
   return (
     <div className="w-1/2">
       <Paper
-        p="md"
         withBorder
-        className="flex flex-row flex-wrap w-full gap-2.5"
+        className="flex flex-row flex-wrap w-full gap-2 relative p-4 pb-[3.5rem]"
       >
         {videoInfo?.keywords.map((item) => (
           <Badge key={item} tt="none" variant="light">
             {item}
           </Badge>
         ))}
+        <VideoTagsCopy />
       </Paper>
     </div>
   );

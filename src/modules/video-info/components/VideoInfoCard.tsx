@@ -1,4 +1,7 @@
-import { VideoDetail } from "@client/modules/video-info/components";
+import {
+  VideoDetail,
+  VideoDownload,
+} from "@client/modules/video-info/components";
 import { Card } from "@mantine/core";
 
 export const VideoInfoCard = () => {
@@ -7,9 +10,10 @@ export const VideoInfoCard = () => {
       shadow="xs"
       padding="lg"
       withBorder
-      className="flex-1 gap-8 overflow-y-auto scrollbar-stable bottom-container"
+      className="flex-1 gap-6 overflow-y-auto scrollbar-stable bottom-container"
     >
       <VideoDetail />
+      <VideoDownload />
     </Card>
   );
 };
