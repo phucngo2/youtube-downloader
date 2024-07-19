@@ -13,6 +13,7 @@ export const VideoTagsCopy = () => {
   const handleCopyKeywords = useCallback(() => {
     navigator.clipboard.writeText(videoInfo?.keywords?.join(", ") || "");
     open();
+    clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(close, 5000);
   }, [videoInfo, open, close]);
 
