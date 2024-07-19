@@ -4,7 +4,7 @@ import { EVENT_GET_VIDEO_INFO } from "../config";
 import { IVideoInfo } from "../types";
 import { mapToIVideoInfo } from "../utils";
 
-export function ytdlHandlers() {
+export function registerYtdlHandlers() {
   ipcMain.handle(
     EVENT_GET_VIDEO_INFO,
     async (_event, searchValue): Promise<IVideoInfo | null> => {
