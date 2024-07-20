@@ -10,7 +10,7 @@ export const VideoDownloadTable = () => {
 
   const rows = useMemo(() => {
     return filterFormatList(videoInfo?.formats || []).map((format) => (
-      <VideoDownloadTableRow key={format.itag} format={format} />
+      <VideoDownloadTableRow key={format.itag} videoFormat={format} />
     ));
   }, [videoInfo]);
 

@@ -5,34 +5,34 @@ import { IconHeadphones, IconVideo } from "@tabler/icons-react";
 import { VideoDownloadActions } from "./VideoDownloadActions";
 
 interface Props {
-  format: IVideoFormat;
+  videoFormat: IVideoFormat;
 }
 
-export const VideoDownloadTableRow: React.FC<Props> = ({ format }) => {
-  const isAudio = format.hasAudio && !format.hasVideo;
+export const VideoDownloadTableRow: React.FC<Props> = ({ videoFormat }) => {
+  const isAudio = videoFormat.hasAudio && !videoFormat.hasVideo;
   return (
-    <Table.Tr key={format.itag}>
+    <Table.Tr key={videoFormat.itag}>
       <Table.Td className="font-semibold">
         {isAudio ? (
           <Group gap="xs" wrap="nowrap">
             <IconHeadphones />
-            <span>{format.audioBitrate} kbps</span>
+            <span>{videoFormat.audioBitrate} kbps</span>
           </Group>
         ) : (
           <Group gap="xs" wrap="nowrap">
             <IconVideo />
-            <span>{format.qualityLabel}</span>
+            <span>{videoFormat.qualityLabel}</span>
           </Group>
         )}
       </Table.Td>
       <Table.Td className="text-center">
-        {isNaN(Number(format.contentLength))
+        {isNaN(Number(videoFormat.contentLength))
           ? ""
-          : humanFileSize(Number(format.contentLength), true)}
+          : humanFileSize(Number(videoFormat.contentLength), true)}
       </Table.Td>
-      <Table.Td className="text-center">.{format.container}</Table.Td>
+      <Table.Td className="text-center">.{videoFormat.container}</Table.Td>
       <Table.Td>
-        <VideoDownloadActions />
+        <VideoDownloadActions videoFormat={videoFormat} />
       </Table.Td>
     </Table.Tr>
   );
