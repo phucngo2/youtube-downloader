@@ -1,10 +1,13 @@
-import { EVENT_GET_DOWNLOADS_PATH } from "@server/config";
+import { invokeSavePathEvent } from "@client/modules/search-form/handlers";
+import { AppStorage } from "@client/utils";
 import { atom } from "jotai";
 
 const getInitialValue = async () => {
-  const res: string | null = await window.ipcRenderer.invoke(
-    EVENT_GET_DOWNLOADS_PATH
-  );
+  const savePath = AppStorage.getSavePath();
+  if (savePath) {
+    return savePath;
+  }
+  const res: string | null = await invokeSavePathEvent();
   return res || "";
 };
 

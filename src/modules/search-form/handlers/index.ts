@@ -1,5 +1,9 @@
-import { EVENT_GET_DOWNLOADS_PATH, EVENT_GET_VIDEO_INFO } from "@server/config";
-import { IVideoInfo } from "@server/types";
+import {
+  EVENT_GET_DOWNLOADS_PATH,
+  EVENT_GET_VIDEO_INFO,
+  EVENT_OPEN_DIR_DIALOG,
+} from "@server/config";
+import { IOpenDirDialogResult, IVideoInfo } from "@server/types";
 
 export const invokeSearchEvent = async (
   searchValue: string
@@ -11,7 +15,12 @@ export const invokeSearchEvent = async (
   return res;
 };
 
-export const invokeSavePathEvent = async () => {
+export const invokeSavePathEvent = async (): Promise<string | null> => {
   const res = await window.ipcRenderer.invoke(EVENT_GET_DOWNLOADS_PATH);
+  return res;
+};
+
+export const invokeOpenDirDialog = async (): Promise<IOpenDirDialogResult> => {
+  const res = await window.ipcRenderer.invoke(EVENT_OPEN_DIR_DIALOG);
   return res;
 };

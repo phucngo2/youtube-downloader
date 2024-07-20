@@ -1,32 +1,37 @@
-import { savePathAtom } from "@client/stores";
+import { useSavePathAtom } from "@client/modules/search-form/hooks";
 import { ActionIcon, rem, TextInput, Tooltip } from "@mantine/core";
+import { IOpenDirDialogResult } from "@server/types";
 import { IconDownload, IconPaperclip } from "@tabler/icons-react";
-import { useAtom } from "jotai";
 
-export const InputFileLocation = () => {
-  const [savePath, setSavePath] = useAtom(savePathAtom);
+interface Props {
+  mutateAsync: () => Promise<IOpenDirDialogResult>;
+}
 
-  const handleChangeSavePathClick = () => {};
+export const InputFileLocation: React.FC<Props> = ({ mutateAsync }) => {
+  const { savePath, setSavePath } = useSavePathAtom();
+
+  const handleChangeSavePathClick = async () => {
+    const res = await mutateAsync();
+    if (res.canceled || !res.filePath) {
+      return;
+    }
+    setSavePath(res.filePath);
+  };
 
   return (
-    <Tooltip position="bottom" withArrow label="Change file save location">
-      <TextInput
-        placeholder="Paste video id or url here..."
-        readOnly
-        className="w-1/2 cursor-pointer min-w-60"
-        value={savePath}
-        styles={{
-          input: {
-            cursor: "pointer",
-          },
-        }}
-        leftSection={
-          <IconPaperclip
-            style={{ width: rem(16), height: rem(16) }}
-            stroke={2.5}
-          />
-        }
-        rightSection={
+    <TextInput
+      placeholder="Paste video id or url here..."
+      readOnly
+      className="w-1/2 cursor-pointer min-w-60"
+      value={savePath}
+      leftSection={
+        <IconPaperclip
+          style={{ width: rem(16), height: rem(16) }}
+          stroke={2.5}
+        />
+      }
+      rightSection={
+        <Tooltip position="bottom" withArrow label="Change file save location">
           <ActionIcon
             color="violet"
             className="cursor-pointer"
@@ -37,8 +42,8 @@ export const InputFileLocation = () => {
               stroke={2.5}
             />
           </ActionIcon>
-        }
-      />
-    </Tooltip>
+        </Tooltip>
+      }
+    />
   );
 };
