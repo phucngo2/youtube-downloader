@@ -7,7 +7,6 @@ import { useMemo } from "react";
 
 export const VideoDownloadTable = () => {
   const videoInfo = useAtomValue(videoInfoAtom);
-  console.log(videoInfo?.formats);
 
   const rows = useMemo(() => {
     return filterFormatList(videoInfo?.formats || []).map((format) => (
@@ -20,9 +19,9 @@ export const VideoDownloadTable = () => {
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Quality</Table.Th>
-          <Table.Th>Original Size</Table.Th>
-          <Table.Th>Original Container</Table.Th>
-          <Table.Th>Actions</Table.Th>
+          <Table.Th className="text-center">Original Size</Table.Th>
+          <Table.Th className="text-center">Original Container</Table.Th>
+          <Table.Th className="text-center">Actions</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
