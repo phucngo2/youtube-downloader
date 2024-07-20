@@ -1,5 +1,5 @@
 import { IVideoInfo } from "@server/types";
-import { videoInfo } from "ytdl-core";
+import { videoInfo } from "@distube/ytdl-core";
 
 export const mapToIVideoInfo = (videoInfo: videoInfo): IVideoInfo => {
   return {

@@ -1,9 +1,16 @@
-import {
-  thumbnail,
-  VideoFormatQuality as YtdlVideoFormatQuality,
-} from "ytdl-core";
+import { thumbnail } from "@distube/ytdl-core";
 
 type ExtendString<T extends string> = T | Omit<string, T>;
+type YtdlVideoFormatQuality =
+  | "tiny"
+  | "small"
+  | "medium"
+  | "large"
+  | "hd720"
+  | "hd1080"
+  | "hd1440"
+  | "hd2160"
+  | "highres";
 export type VideoFormatQuality = ExtendString<YtdlVideoFormatQuality>;
 
 export type QualityLabel =

@@ -1,5 +1,5 @@
 import { ipcMain } from "electron";
-import ytdl from "ytdl-core";
+import ytdl from "@distube/ytdl-core";
 import { EVENT_GET_VIDEO_INFO } from "../config";
 import { IVideoInfo } from "../types";
 import { mapToIVideoInfo } from "../utils";
