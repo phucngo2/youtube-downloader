@@ -1,5 +1,6 @@
-import { app, ipcMain } from "electron";
-import { EVENT_GET_DOWNLOADS_PATH } from "../config";
+import { app, dialog, ipcMain } from "electron";
+import { EVENT_GET_DOWNLOADS_PATH, EVENT_OPEN_DIR_DIALOG } from "../config";
+import { IOpenDirDialogResult } from "@server/types";
 
 export function registerPathHandlers() {
   ipcMain.handle(
@@ -12,6 +13,27 @@ export function registerPathHandlers() {
       } catch (e) {
         console.error("Error getting downloads path:", e);
         return null;
+      }
+    }
+  );
+
+  ipcMain.handle(
+    EVENT_OPEN_DIR_DIALOG,
+    async (_event): Promise<IOpenDirDialogResult> => {
+      try {
+        let res = await dialog.showOpenDialog({
+          properties: ["openDirectory"],
+        });
+
+        return {
+          canceled: res.canceled,
+          filePath: res.filePaths[0],
+        };
+      } catch (e) {
+        console.error("Error getting downloads path:", e);
+        return {
+          canceled: true,
+        };
       }
     }
   );
