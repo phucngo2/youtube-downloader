@@ -25,5 +25,6 @@ export const mapToIVideoInfo = (videoInfo: videoInfo): IVideoInfo => {
     keywords: videoInfo.videoDetails.keywords,
     embedUrl: videoInfo.videoDetails.embed.iframeUrl,
     videoUrl: videoInfo.videoDetails.video_url,
+    videoId: videoInfo.videoDetails.videoId,
   };
 };

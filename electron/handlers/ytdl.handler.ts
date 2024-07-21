@@ -1,8 +1,9 @@
-import { ipcMain } from "electron";
 import ytdl from "@distube/ytdl-core";
-import { EVENT_GET_VIDEO_INFO } from "../config";
-import { IVideoInfo } from "../types";
+import { ipcMain } from "electron";
+import { EVENT_DOWNLOAD_VIDEO, EVENT_GET_VIDEO_INFO } from "../config";
+import { IDownloadRequest, IVideoInfo } from "../types";
 import { mapToIVideoInfo } from "../utils";
+import { handleDownloadVideo } from "../workers/video-download.worker";
 
 export function registerYtdlHandlers() {
   ipcMain.handle(
@@ -17,4 +18,12 @@ export function registerYtdlHandlers() {
       }
     }
   );
+
+  ipcMain.on(EVENT_DOWNLOAD_VIDEO, (_event, request: IDownloadRequest) => {
+    try {
+      handleDownloadVideo(request);
+    } catch (e) {
+      console.error("Error downloading media:", e);
+    }
+  });
 }

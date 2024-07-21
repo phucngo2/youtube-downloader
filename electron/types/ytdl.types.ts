@@ -66,4 +66,5 @@ export interface IVideoInfo {
   title: string;
   keywords?: string[];
   embedUrl: string;
+  videoId: string;
 }
