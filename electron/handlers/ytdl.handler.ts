@@ -3,7 +3,8 @@ import { ipcMain } from "electron";
 import { EVENT_DOWNLOAD_VIDEO, EVENT_GET_VIDEO_INFO } from "../config";
 import { IDownloadRequest, IVideoInfo } from "../types";
 import { mapToIVideoInfo } from "../utils";
-import { handleDownloadVideo } from "../workers/video-download.worker";
+import VideoDownloadWorker from "../workers/video-download.worker?worker&url";
+import { Worker } from "node:worker_threads";
 
 export function registerYtdlHandlers() {
   ipcMain.handle(
@@ -21,7 +22,8 @@ export function registerYtdlHandlers() {
 
   ipcMain.on(EVENT_DOWNLOAD_VIDEO, (_event, request: IDownloadRequest) => {
     try {
-      handleDownloadVideo(request);
+      const worker = new Worker(VideoDownloadWorker, { workerData: request });
+      worker.on("message", (message) => console.log(message));
     } catch (e) {
       console.error("Error downloading media:", e);
     }
