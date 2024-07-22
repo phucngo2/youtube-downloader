@@ -3,11 +3,16 @@ import childProcess from "node:child_process";
 import path from "node:path";
 import worker_threads from "node:worker_threads";
 import { Writable } from "stream";
-import { IRenderRequest } from "../types";
+import { IDownloadMessage, IDownloadResult, IRenderRequest } from "../types";
 import { getFfpmpegPath } from "../utils/ffpmeg-path";
-import { removeIllegalCharactersFromFilename } from "../utils/helpers";
+import {
+  debounce,
+  removeIllegalCharactersFromFilename,
+  throttle,
+} from "../utils/helpers";
 
 const request: IRenderRequest = worker_threads.workerData;
+const parentPort = worker_threads.parentPort;
 const pathToFfmpeg = getFfpmpegPath(request.isPackaged);
 
 let videoStream = ytdl(request.url, {
@@ -15,7 +20,16 @@ let videoStream = ytdl(request.url, {
 });
 
 // Send current loading state to renderer
-videoStream.on("progress", (_, _downloaded, _total) => {});
+videoStream.on(
+  "progress",
+  throttle((_: unknown, downloaded: number, total: number) => {
+    let message: IDownloadMessage = {
+      downloaded,
+      total,
+    };
+    parentPort?.postMessage(message);
+  }),
+);
 
 let audioStream = ytdl(request.url, {
   quality: "highestaudio",
@@ -74,8 +88,9 @@ videoStream.pipe(ffmpegProcess.stdio[4] as Writable);
 
 // On close ffmpeg process
 ffmpegProcess.on("close", (code) => {
-  // Status 0 = success
-  if (code === 0) {
-  } else {
-  }
+  let isSuccess = code === 0;
+  let result: IDownloadResult = {
+    isSuccess,
+  };
+  parentPort?.postMessage(result);
 });

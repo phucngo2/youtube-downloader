@@ -9,3 +9,12 @@ export interface IDownloadRequest {
 export interface IRenderRequest extends IDownloadRequest {
   isPackaged: boolean;
 }
+
+export interface IDownloadMessage {
+  downloaded: number;
+  total: number;
+}
+
+export interface IDownloadResult {
+  isSuccess: boolean;
+}
