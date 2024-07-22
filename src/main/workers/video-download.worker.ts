@@ -3,12 +3,12 @@ import childProcess from "node:child_process";
 import path from "node:path";
 import worker_threads from "node:worker_threads";
 import { Writable } from "stream";
-import { IDownloadRequest } from "../types";
+import { IRenderRequest } from "../types";
 import { getFfpmpegPath } from "../utils/ffpmeg-path";
 import { removeIllegalCharactersFromFilename } from "../utils/helpers";
 
-const pathToFfmpeg = getFfpmpegPath();
-const request: IDownloadRequest = worker_threads.workerData;
+const request: IRenderRequest = worker_threads.workerData;
+const pathToFfmpeg = getFfpmpegPath(request.isPackaged);
 
 let videoStream = ytdl(request.url, {
   quality: request.itag,

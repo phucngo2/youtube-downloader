@@ -5,3 +5,7 @@ export interface IDownloadRequest {
   videoTitle: string;
   videoId: string;
 }
+
+export interface IRenderRequest extends IDownloadRequest {
+  isPackaged: boolean;
+}
