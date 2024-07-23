@@ -2,6 +2,12 @@ export const removeIllegalCharactersFromFilename = (filename: string) => {
   return filename.replace(/[/\\?%*:|"<>]/g, "-");
 };
 
+export const getFolderPath = (filePath: string) => {
+  let folderPathArr = filePath.split("\\");
+  folderPathArr.pop();
+  return folderPathArr.join("\\");
+};
+
 export const debounce = (fn: Function, ms = 300) => {
   let timeoutId: ReturnType<typeof setTimeout>;
   return function (this: any, ...args: any[]) {

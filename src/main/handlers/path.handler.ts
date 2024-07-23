@@ -1,6 +1,13 @@
-import { app, dialog, ipcMain } from "electron";
-import { EVENT_GET_DOWNLOADS_PATH, EVENT_OPEN_DIR_DIALOG } from "../config";
+import { app, dialog, ipcMain, shell } from "electron";
+import fs from "node:fs";
+import {
+  EVENT_GET_DOWNLOADS_PATH,
+  EVENT_OPEN_DIR_DIALOG,
+  EVENT_OPEN_FILE_LOCATION,
+  EVENT_OPEN_PATH,
+} from "../config";
 import { IOpenDirDialogResult } from "../types";
+import { getFolderPath } from "../utils/helpers";
 
 export function registerPathHandlers() {
   ipcMain.handle(
@@ -37,4 +44,24 @@ export function registerPathHandlers() {
       }
     },
   );
+
+  ipcMain.handle(EVENT_OPEN_PATH, (_event, path: string) => {
+    try {
+      shell.openPath(path);
+    } catch (e) {
+      console.error("Error opening file:", e);
+    }
+  });
+
+  ipcMain.handle(EVENT_OPEN_FILE_LOCATION, (_event, path: string) => {
+    try {
+      if (fs.existsSync(path)) {
+        shell.showItemInFolder(path);
+      } else {
+        shell.openPath(getFolderPath(path));
+      }
+    } catch (e) {
+      console.error("Error opening file location:", e);
+    }
+  });
 }

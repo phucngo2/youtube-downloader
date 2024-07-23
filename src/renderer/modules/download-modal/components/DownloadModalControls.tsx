@@ -25,6 +25,7 @@ export const DownloadModalControls: React.FC<Props> = ({ context, id }) => {
         }
         color="gray"
         onClick={() => context.closeModal(id)}
+        variant="light"
       >
         Close modal
       </Button>
