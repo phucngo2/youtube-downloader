@@ -4,5 +4,6 @@ export const EVENT_OPEN_DIR_DIALOG = "event-open-dir-dialog";
 export const EVENT_OPEN_PATH = "event-open-path";
 export const EVENT_OPEN_FILE_LOCATION = "event-open-file-location";
 export const EVENT_DOWNLOAD_VIDEO = "event-download-video";
+export const EVENT_DOWNLOAD_AUDIO = "event-download-audio";
 export const EVENT_DOWNLOAD_VIDEO_PROGRESS = "event-download-video-progress";
 export const EVENT_DOWNLOAD_VIDEO_RESULT = "event-download-video-result";

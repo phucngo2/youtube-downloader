@@ -32,7 +32,7 @@ export const VideoDownloadTableRow: React.FC<Props> = ({ videoFormat }) => {
       </Table.Td>
       <Table.Td className="text-center">.{videoFormat.container}</Table.Td>
       <Table.Td>
-        <VideoDownloadActions videoFormat={videoFormat} />
+        <VideoDownloadActions isAudio={isAudio} videoFormat={videoFormat} />
       </Table.Td>
     </Table.Tr>
   );
