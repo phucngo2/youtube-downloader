@@ -15,6 +15,16 @@ export interface IDownloadMessage {
   total: number;
 }
 
+export const DownloadStatusEnum = {
+  Success: "Success",
+  Failed: "Failed",
+  Pending: "Pending",
+} as const;
+
+export type DownloadStatus =
+  (typeof DownloadStatusEnum)[keyof typeof DownloadStatusEnum];
+
 export interface IDownloadResult {
-  isSuccess: boolean;
+  status: DownloadStatus;
+  fullSavePath?: string;
 }
