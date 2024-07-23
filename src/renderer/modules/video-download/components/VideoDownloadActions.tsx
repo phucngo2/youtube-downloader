@@ -1,8 +1,7 @@
-import { DownloadModal } from "@client/modules/download-modal/components";
+import { useDownloadProgress } from "@client/modules/download-modal/hooks";
 import { sendDownloadVideoEvent } from "@client/modules/video-download/handlers";
 import { savePathAtom, videoInfoAtom } from "@client/stores";
 import { ActionIcon, Group, rem, Tooltip } from "@mantine/core";
-import { useMediaQuery } from "@mantine/hooks";
 import { modals } from "@mantine/modals";
 import { IVideoFormat } from "@server/types";
 import { IconDownload, IconPlayerPlayFilled } from "@tabler/icons-react";
@@ -15,12 +14,13 @@ interface Props {
 export const VideoDownloadActions: React.FC<Props> = ({ videoFormat }) => {
   const videoInfo = useAtomValue(videoInfoAtom);
   const savePath = useAtomValue(savePathAtom);
+  const { clearProgress } = useDownloadProgress();
 
   const openModal = () =>
     modals.openContextModal({
       modal: "downloadModal",
       // Unclosable
-      closeOnEscape: false,
+      // closeOnEscape: false,
       closeOnClickOutside: false,
       withCloseButton: false,
       // Modal location & size
@@ -31,13 +31,14 @@ export const VideoDownloadActions: React.FC<Props> = ({ videoFormat }) => {
     });
 
   const handleDownload = () => {
-    // sendDownloadVideoEvent({
-    //   videoTitle: videoInfo!.title,
-    //   itag: videoFormat.itag,
-    //   url: videoInfo!.videoUrl,
-    //   savePath,
-    //   videoId: videoInfo!.videoId,
-    // });
+    sendDownloadVideoEvent({
+      videoTitle: videoInfo!.title,
+      itag: videoFormat.itag,
+      url: videoInfo!.videoUrl,
+      savePath,
+      videoId: videoInfo!.videoId,
+    });
+    clearProgress();
     openModal();
   };
 

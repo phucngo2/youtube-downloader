@@ -1,8 +1,9 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { electronApp, is, optimizer } from "@electron-toolkit/utils";
+import { app, BrowserWindow, ipcMain, shell } from "electron";
 import { join } from "path";
-import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { registerPathHandlers, registerYtdlHandlers } from "./handlers";
+import { registerDownloadHandlers } from "./handlers/download.handler";
 
 function createWindow(): void {
   // Create the browser window.
@@ -75,3 +76,4 @@ app.on("window-all-closed", () => {
 // code. You can also put them in separate files and require them here.
 registerPathHandlers();
 registerYtdlHandlers();
+registerDownloadHandlers();
