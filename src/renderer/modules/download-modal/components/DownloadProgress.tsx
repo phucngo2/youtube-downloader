@@ -1,17 +1,24 @@
+import { useDownloadProgress } from "@client/modules/download-modal/hooks";
+import { getDownloadProgressColor } from "@client/modules/download-modal/utils";
 import { Progress } from "@mantine/core";
-import { getDownloadProgressColor } from "../utils";
+import { useMemo } from "react";
 
 export const DownloadProgress = () => {
-  let downloaded = 0;
-  let total = 0;
+  const { downloadProgress } = useDownloadProgress();
+
+  const downloadPercent = useMemo(() => {
+    if (!downloadProgress.total) return 0;
+    return downloadProgress.downloaded / downloadProgress.total;
+  }, [downloadProgress]);
+
   return (
     <Progress.Root className="w-full" size="xl">
       <Progress.Section
         animated
-        value={100}
-        color={getDownloadProgressColor(downloaded, total)}
+        value={downloadPercent}
+        color={getDownloadProgressColor(downloadPercent)}
       >
-        <Progress.Label>100%</Progress.Label>
+        <Progress.Label>{downloadPercent}%</Progress.Label>
       </Progress.Section>
     </Progress.Root>
   );

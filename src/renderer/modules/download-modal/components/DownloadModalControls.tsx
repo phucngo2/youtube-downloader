@@ -1,6 +1,9 @@
+import { DownloadModalControlsSuccess } from "@client/modules/download-modal/components";
+import { useDownloadProgress } from "@client/modules/download-modal/hooks";
 import { Button, Group, rem } from "@mantine/core";
 import { ModalsContextProps } from "@mantine/modals/lib/context";
-import { IconFile, IconFolder, IconX } from "@tabler/icons-react";
+import { DownloadStatusEnum } from "@server/types";
+import { IconX } from "@tabler/icons-react";
 
 interface Props {
   context: ModalsContextProps;
@@ -8,6 +11,12 @@ interface Props {
 }
 
 export const DownloadModalControls: React.FC<Props> = ({ context, id }) => {
+  const { downloadProgress } = useDownloadProgress();
+  if (
+    downloadProgress.status !== DownloadStatusEnum.Failed &&
+    downloadProgress.status !== DownloadStatusEnum.Success
+  )
+    return <></>;
   return (
     <Group>
       <Button
@@ -19,26 +28,7 @@ export const DownloadModalControls: React.FC<Props> = ({ context, id }) => {
       >
         Close modal
       </Button>
-      <Button
-        leftSection={
-          <IconFolder
-            style={{ width: rem(16), height: rem(16) }}
-            stroke={2.5}
-          />
-        }
-        onClick={() => context.closeModal(id)}
-      >
-        Open File Location
-      </Button>
-      <Button
-        leftSection={
-          <IconFile style={{ width: rem(16), height: rem(16) }} stroke={2.5} />
-        }
-        color="green"
-        onClick={() => context.closeModal(id)}
-      >
-        Open File
-      </Button>
+      <DownloadModalControlsSuccess />
     </Group>
   );
 };
