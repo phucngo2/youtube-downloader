@@ -1,4 +1,4 @@
-import { LoadingScreen } from "@client/components";
+import { LoadingScreen, ModalsProvider } from "@client/components";
 import { theme } from "@client/config";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -15,9 +15,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
       <MantineProvider defaultColorScheme="dark" theme={theme}>
-        <Suspense fallback={<LoadingScreen />}>
-          <App />
-        </Suspense>
+        <ModalsProvider>
+          <Suspense fallback={<LoadingScreen />}>
+            <App />
+          </Suspense>
+        </ModalsProvider>
       </MantineProvider>
     </QueryClientProvider>
   </React.StrictMode>,

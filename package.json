@@ -28,6 +28,7 @@
     "@mantine/core": "^7.11.2",
     "@mantine/form": "^7.11.2",
     "@mantine/hooks": "^7.11.2",
+    "@mantine/modals": "^7.11.2",
     "@tabler/icons-react": "^3.11.0",
     "@tanstack/react-query": "^5.51.5",
     "ffmpeg-static": "^5.2.0",
