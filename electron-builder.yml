@@ -13,8 +13,6 @@ asarUnpack:
   - resources/**
 win:
   executableName: youtube-stalker
-  target: portable
-  icon: build/icon.ico
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
