@@ -1,5 +1,5 @@
-import { createTheme } from "@mantine/core";
+import { createTheme, MantineThemeOverride } from "@mantine/core";
 
-export const theme = createTheme({
+export const theme: MantineThemeOverride = createTheme({
   /** Put your mantine theme override here */
 });
