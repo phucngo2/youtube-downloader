@@ -12,7 +12,7 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: youtube-stalker
+  executableName: youtube-downloader
   target:
     - nsis
     - portable
@@ -23,7 +23,7 @@ nsis:
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
 portable:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: ${name}-${version}-portable.${ext}
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
