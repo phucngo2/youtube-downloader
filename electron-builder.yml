@@ -13,11 +13,17 @@ asarUnpack:
   - resources/**
 win:
   executableName: youtube-stalker
+  target:
+    - nsis
+    - portable
+  icon: build/icon.ico
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
+portable:
+  artifactName: ${name}-${version}.${ext}
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
