@@ -1,6 +1,6 @@
-# 📚 Youtube Stalker Desktop Application
+# 📚 YouTube Downloader
 
-Yet another Youtube Downloader!
+Yet another YouTube Downloader!
 
 ## 🛠️ Built With
 
