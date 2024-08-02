@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: Youtube Downloader
+productName: YouTube Downloader
 directories:
   buildResources: build
 files:

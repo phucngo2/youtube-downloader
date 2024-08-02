@@ -14,21 +14,28 @@ Yet another Youtube Downloader!
 
 ## 📑 Features
 
-⭐ Play video from Youtube. 🐧
+⭐ Play video from YouTube. 🐧
 
 ⭐ Stalk YouTube video information, such as video keywords.
 
 ⭐ Download high-quality video or audio.
 
 ## 🚧 Development Setup
+
 ### Prerequisites
+
 Before starting, ensure you have the following tools and environments set up on your machine:
+
 - NodeJS
+
 ### 1. Install dependencies
+
 ```bash
 npm install
 ```
+
 ### 2. Run the application
+
 ```bash
 npm run dev
 ```
