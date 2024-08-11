@@ -1,7 +1,12 @@
 import { app } from "electron";
 import { Worker } from "node:worker_threads";
-import { IDownloadRequest, IRenderRequest, IWorkersMap } from "../types";
-import fs from "node:fs";
+import {
+  IDownloadCancelRequest,
+  IDownloadRequest,
+  IRenderRequest,
+  IWorkersMap,
+} from "../types";
+import { tryUnlinkFile } from "./files";
 
 const WorkersMapSingleton = (function () {
   let instance: IWorkersMap | undefined;
@@ -18,31 +23,25 @@ const WorkersMapSingleton = (function () {
   };
 })();
 
-export const unregisterWorker = (request: IDownloadRequest) => {
+export const unregisterWorker = async (request: IDownloadCancelRequest) => {
   const workerKey = generateWorkerKey(request);
   const workersMap = WorkersMapSingleton.getInstance();
   const workerMapValue = workersMap.get(workerKey);
 
   if (workerMapValue) {
     const worker = workerMapValue.worker;
-    worker.terminate();
-    try {
-      if (fs.lstatSync(request.savePath).isFile()) {
-        fs.unlinkSync(request.savePath);
-      }
-    } catch (error) {
-      // Handle potential errors (e.g., file not found)
-      console.error(`Failed to delete file at ${request.savePath}:`, error);
-    }
+    const savePath = workerMapValue.savePath;
+    await worker.terminate();
+    tryUnlinkFile(savePath);
 
     workersMap.delete(workerKey);
   }
 };
 
-export const registerWorker = (
+export const registerWorker = async (
   request: IDownloadRequest,
   workerPath: string,
-): Worker => {
+): Promise<Worker> => {
   const workerData: IRenderRequest = {
     ...request,
     isPackaged: app.isPackaged,
@@ -54,7 +53,7 @@ export const registerWorker = (
   const workersMap = WorkersMapSingleton.getInstance();
 
   // Clean up any existing worker before registering a new one
-  unregisterWorker(request);
+  await unregisterWorker(request);
 
   const workerKey = generateWorkerKey(request);
   workersMap.set(workerKey, {
@@ -71,7 +70,7 @@ export const registerWorker = (
 
 //#region Private
 
-function generateWorkerKey(request: IDownloadRequest): string {
+function generateWorkerKey(request: IDownloadCancelRequest): string {
   return `${request.videoId}-${request.itag}`;
 }
 

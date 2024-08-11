@@ -29,3 +29,8 @@ export interface IDownloadResult {
   status: DownloadStatus;
   fullSavePath?: string;
 }
+
+export interface IDownloadCancelRequest {
+  videoId: string;
+  itag: number;
+}

@@ -11,3 +11,4 @@ export const EVENT_DOWNLOAD_AUDIO = "event-download-audio";
 export const EVENT_DOWNLOAD_VIDEO_PROGRESS = "event-download-video-progress";
 export const EVENT_DOWNLOAD_VIDEO_RESULT = "event-download-video-result";
 export const EVENT_DOWNLOADING = "event-downloading";
+export const EVENT_DOWNLOAD_CANCEL = "event-download-cancel";

@@ -1,13 +1,19 @@
 import { ipcMain } from "electron";
 import {
   EVENT_DOWNLOAD_AUDIO,
+  EVENT_DOWNLOAD_CANCEL,
   EVENT_DOWNLOAD_VIDEO,
   EVENT_DOWNLOAD_VIDEO_PROGRESS,
   EVENT_DOWNLOAD_VIDEO_RESULT,
   EVENT_DOWNLOADING,
 } from "../config";
-import { IDownloadMessage, IDownloadRequest, IDownloadResult } from "../types";
-import { registerWorker } from "../utils";
+import {
+  IDownloadCancelRequest,
+  IDownloadMessage,
+  IDownloadRequest,
+  IDownloadResult,
+} from "../types";
+import { registerWorker, unregisterWorker } from "../utils";
 import { getSavePathMp3, getSavePathMp4 } from "../utils";
 import audioDownloadWorkerPath from "../workers/audio-download.worker?modulePath";
 import videoDownloadWorkerPath from "../workers/video-download.worker?modulePath";
@@ -30,14 +36,25 @@ export function registerDownloadHandlers() {
       console.error("Error downloading audio:", e);
     }
   });
+
+  ipcMain.handle(
+    EVENT_DOWNLOAD_CANCEL,
+    async (_, request: IDownloadCancelRequest) => {
+      try {
+        await unregisterWorker(request);
+      } catch (e) {
+        console.error("Error cancel download:", e);
+      }
+    },
+  );
 }
 
-function handleWorkerDownload(
+async function handleWorkerDownload(
   event: Electron.IpcMainEvent,
   request: IDownloadRequest,
   workerPath: string,
 ) {
-  const worker = registerWorker(request, workerPath);
+  const worker = await registerWorker(request, workerPath);
   worker.on("message", (message: IDownloadMessage | IDownloadResult) => {
     if ("status" in message) {
       event.sender.send(EVENT_DOWNLOAD_VIDEO_RESULT, message);
