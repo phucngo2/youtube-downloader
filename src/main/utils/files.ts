@@ -1,13 +1,14 @@
 import fs from "node:fs";
 
-const unlinkFile = (path, retries = 3, delay = 1000) => {
+const unlinkFile = (path: string, retries = 3, delay = 300) => {
   return new Promise<void>((resolve, reject) => {
-    const attempt = () => {
+    const attempt = (remainingRetries: number) => {
       fs.unlink(path, (err) => {
         if (err) {
-          if (err.code === "EBUSY" && retries > 0) {
+          if (err.code === "EBUSY" && remainingRetries > 0) {
+            console.log("a");
             setTimeout(() => {
-              attempt();
+              attempt(remainingRetries - 1);
             }, delay);
           } else {
             reject(err);
@@ -17,20 +18,20 @@ const unlinkFile = (path, retries = 3, delay = 1000) => {
         }
       });
     };
-    attempt();
+    attempt(retries);
   });
 };
 
-export const tryUnlinkFile = (path: string) => {
+export const tryUnlinkFile = async (path: string) => {
   try {
     if (fs.existsSync(path)) {
       if (fs.lstatSync(path).isFile()) {
-        unlinkFile(path);
+        await unlinkFile(path);
       }
     }
   } catch (error) {
     // Handle potential errors (e.g., file not found)
-    console.log(`Failed to delete file at ${path}`);
+    console.error(`Failed to delete file at ${path}`);
     console.error(error);
   }
 };

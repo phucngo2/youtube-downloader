@@ -25,17 +25,7 @@ const WorkersMapSingleton = (function () {
 
 export const unregisterWorker = async (request: IDownloadCancelRequest) => {
   const workerKey = generateWorkerKey(request);
-  const workersMap = WorkersMapSingleton.getInstance();
-  const workerMapValue = workersMap.get(workerKey);
-
-  if (workerMapValue) {
-    const worker = workerMapValue.worker;
-    const savePath = workerMapValue.savePath;
-    await worker.terminate();
-    tryUnlinkFile(savePath);
-
-    workersMap.delete(workerKey);
-  }
+  cleanupWorker(workerKey);
 };
 
 export const registerWorker = async (
@@ -68,10 +58,32 @@ export const registerWorker = async (
   return worker;
 };
 
+export const cleanupWorkers = async () => {
+  const workersMap = WorkersMapSingleton.getInstance();
+  for (let [key] of workersMap) {
+    await cleanupWorker(key);
+  }
+};
+
 //#region Private
 
 function generateWorkerKey(request: IDownloadCancelRequest): string {
   return `${request.videoId}-${request.itag}`;
+}
+
+async function cleanupWorker(workerKey: string) {
+  const workersMap = WorkersMapSingleton.getInstance();
+  const workerMapValue = workersMap.get(workerKey);
+
+  if (workerMapValue) {
+    const worker = workerMapValue.worker;
+    const savePath = workerMapValue.savePath;
+    await worker.terminate();
+
+    await tryUnlinkFile(savePath);
+
+    workersMap.delete(workerKey);
+  }
 }
 
 //#endregion
