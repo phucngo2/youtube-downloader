@@ -19,6 +19,7 @@ export const DownloadStatusEnum = {
   Success: "Success",
   Failed: "Failed",
   Pending: "Pending",
+  Downloading: "Downloading",
 } as const;
 
 export type DownloadStatus =

@@ -7,7 +7,7 @@ import {
   EVENT_OPEN_PATH,
 } from "../config";
 import { IOpenDirDialogResult } from "../types";
-import { getFolderPath } from "../utils/helpers";
+import { getFolderPath } from "../utils";
 
 export function registerPathHandlers() {
   ipcMain.handle(
