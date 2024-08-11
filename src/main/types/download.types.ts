@@ -19,6 +19,7 @@ export const DownloadStatusEnum = {
   Success: "Success",
   Failed: "Failed",
   Pending: "Pending",
+  Downloading: "Downloading",
 } as const;
 
 export type DownloadStatus =
@@ -27,4 +28,9 @@ export type DownloadStatus =
 export interface IDownloadResult {
   status: DownloadStatus;
   fullSavePath?: string;
+}
+
+export interface IDownloadCancelRequest {
+  videoId: string;
+  itag: number;
 }

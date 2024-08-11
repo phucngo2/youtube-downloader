@@ -8,9 +8,15 @@ import { Title } from "@mantine/core";
 import { ContextModalProps } from "@mantine/modals";
 import { useAtomValue } from "jotai";
 
-interface Props {}
+interface Props {
+  itag: number;
+}
 
-export const DownloadModal = ({ context, id }: ContextModalProps<Props>) => {
+export const DownloadModal = ({
+  context,
+  id,
+  innerProps: { itag },
+}: ContextModalProps<Props>) => {
   const videoInfo = useAtomValue(videoInfoAtom);
   return (
     <div className="min-w-[480px] flex flex-col items-center gap-8 p-3">
@@ -19,7 +25,7 @@ export const DownloadModal = ({ context, id }: ContextModalProps<Props>) => {
       </Title>
       <DownloadModalInfo />
       <DownloadProgress />
-      <DownloadModalControls context={context} id={id} />
+      <DownloadModalControls itag={itag} context={context} id={id} />
     </div>
   );
 };

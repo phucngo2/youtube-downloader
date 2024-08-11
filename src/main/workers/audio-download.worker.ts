@@ -1,6 +1,5 @@
 import ytdl from "@distube/ytdl-core";
 import childProcess from "node:child_process";
-import path from "node:path";
 import worker_threads from "node:worker_threads";
 import { Writable } from "stream";
 import {
@@ -10,11 +9,7 @@ import {
   IDownloadResult,
   IRenderRequest,
 } from "../types";
-import { getFfpmpegPath } from "../utils/ffpmeg-path";
-import {
-  removeIllegalCharactersFromFilename,
-  throttle,
-} from "../utils/helpers";
+import { getFfpmpegPath, getSavePathMp3, throttle } from "../utils";
 
 const request: IRenderRequest = worker_threads.workerData;
 const parentPort = worker_threads.parentPort;
@@ -25,10 +20,7 @@ try {
     quality: request.itag,
   });
 
-  let fullSavePath = path.join(
-    request.savePath,
-    `${removeIllegalCharactersFromFilename(request.videoTitle)}.mp3`,
-  );
+  let fullSavePath = getSavePathMp3(request);
 
   // Send current loading state to renderer
   audioStream.on(
