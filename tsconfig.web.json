@@ -14,10 +14,10 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-      "@client/*": [
+      "@renderer/*": [
         "src/renderer/*"
       ],
-      "@server/*": [ "src/main/*"]
+      "@main/*": [ "src/main/*"]
     }
   }
 }

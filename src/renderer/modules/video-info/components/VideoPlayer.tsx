@@ -1,4 +1,4 @@
-import { videoInfoAtom } from "@client/stores";
+import { videoInfoAtom } from "@renderer/stores";
 import { Title } from "@mantine/core";
 import { useAtomValue } from "jotai";
 

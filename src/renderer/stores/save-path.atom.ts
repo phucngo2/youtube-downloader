@@ -1,5 +1,5 @@
-import { invokeSavePathEvent } from "@client/modules/search-form/handlers";
-import { AppStorage } from "@client/utils";
+import { invokeSavePathEvent } from "@renderer/modules/search-form/handlers";
+import { AppStorage } from "@renderer/utils";
 import { atom } from "jotai";
 
 const getInitialValue = async () => {

@@ -1,8 +1,8 @@
 import {
   VideoTagsCopy,
   VideoTagsEmpty,
-} from "@client/modules/video-info/components";
-import { videoInfoAtom } from "@client/stores";
+} from "@renderer/modules/video-info/components";
+import { videoInfoAtom } from "@renderer/stores";
 import { Badge, Paper } from "@mantine/core";
 import { useAtomValue } from "jotai";
 

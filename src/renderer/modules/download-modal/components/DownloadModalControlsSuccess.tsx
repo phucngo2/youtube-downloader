@@ -1,10 +1,10 @@
 import {
   invokeOpenFileLocationEvent,
   invokeOpenPathEvent,
-} from "@client/modules/download-modal/handlers";
-import { useDownloadProgress } from "@client/modules/download-modal/hooks";
+} from "@renderer/modules/download-modal/handlers";
+import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
 import { Button, rem } from "@mantine/core";
-import { DownloadStatusEnum } from "@server/types";
+import { DownloadStatusEnum } from "@main/types";
 import { IconFile, IconFolder } from "@tabler/icons-react";
 
 export const DownloadModalControlsSuccess = () => {

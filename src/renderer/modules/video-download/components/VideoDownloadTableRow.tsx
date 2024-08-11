@@ -1,8 +1,8 @@
-import { humanFileSize } from "@client/utils";
+import { humanFileSize } from "@renderer/utils";
 import { Group, Table } from "@mantine/core";
-import { IVideoFormat } from "@server/types";
+import { IVideoFormat } from "@main/types";
 import { IconHeadphones, IconVideo } from "@tabler/icons-react";
-import { VideoDownloadActions } from "./VideoDownloadActions";
+import { VideoDownloadActions } from "@renderer/modules/video-download/components";
 
 interface Props {
   videoFormat: IVideoFormat;

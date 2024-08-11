@@ -1,8 +1,8 @@
 import {
   EmptyCard,
   VideoInfoCard,
-} from "@client/modules/video-info/components";
-import { videoInfoAtom } from "@client/stores";
+} from "@renderer/modules/video-info/components";
+import { videoInfoAtom } from "@renderer/stores";
 import { useAtomValue } from "jotai";
 
 export const VideoInfo = () => {

@@ -1,6 +1,6 @@
-import { useSavePathAtom } from "@client/modules/search-form/hooks";
+import { useSavePathAtom } from "@renderer/modules/search-form/hooks";
 import { ActionIcon, rem, TextInput, Tooltip } from "@mantine/core";
-import { IOpenDirDialogResult } from "@server/types";
+import { IOpenDirDialogResult } from "@main/types";
 import { IconDownload, IconPaperclip } from "@tabler/icons-react";
 
 interface Props {

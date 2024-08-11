@@ -1,5 +1,5 @@
-import { LoadingScreen, ModalsProvider } from "@client/components";
-import { theme } from "@client/config";
+import { LoadingScreen, ModalsProvider } from "@renderer/components";
+import { theme } from "@renderer/config";
 import { MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

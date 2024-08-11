@@ -2,8 +2,8 @@ import {
   DownloadModalControls,
   DownloadModalInfo,
   DownloadProgress,
-} from "@client/modules/download-modal/components";
-import { videoInfoAtom } from "@client/stores";
+} from "@renderer/modules/download-modal/components";
+import { videoInfoAtom } from "@renderer/stores";
 import { Title } from "@mantine/core";
 import { ContextModalProps } from "@mantine/modals";
 import { useAtomValue } from "jotai";

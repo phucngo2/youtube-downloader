@@ -1,4 +1,4 @@
-import { invokeOpenDirDialog } from "@client/modules/search-form/handlers";
+import { invokeOpenDirDialog } from "@renderer/modules/search-form/handlers";
 import { useMutation } from "@tanstack/react-query";
 
 export const useOpenDirDialogMutation = () => {

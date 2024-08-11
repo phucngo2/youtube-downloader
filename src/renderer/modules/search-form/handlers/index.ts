@@ -2,8 +2,8 @@ import {
   EVENT_GET_DOWNLOADS_PATH,
   EVENT_GET_VIDEO_INFO,
   EVENT_OPEN_DIR_DIALOG,
-} from "@server/config";
-import { IOpenDirDialogResult, IVideoInfo } from "@server/types";
+} from "@main/config";
+import { IOpenDirDialogResult, IVideoInfo } from "@main/types";
 
 export const invokeSearchEvent = async (
   searchValue: string,

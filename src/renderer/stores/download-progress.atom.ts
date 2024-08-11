@@ -2,7 +2,7 @@ import {
   DownloadStatusEnum,
   IDownloadMessage,
   IDownloadResult,
-} from "@server/types";
+} from "@main/types";
 import { atom } from "jotai";
 
 export interface IDownloadProgressAtom

@@ -1,4 +1,4 @@
-import { IVideoFormat } from "@server/types";
+import { IVideoFormat } from "@main/types";
 
 export const filterFormatList = (
   formatList: IVideoFormat[],

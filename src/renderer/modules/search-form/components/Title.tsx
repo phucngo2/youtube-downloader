@@ -1,4 +1,4 @@
-import ImgYoutubeIcon from "@client/static/youtube_icon.png";
+import ImgYoutubeIcon from "@renderer/static/youtube_icon.png";
 import { Title as MantineTitle } from "@mantine/core";
 
 export const Title = () => {

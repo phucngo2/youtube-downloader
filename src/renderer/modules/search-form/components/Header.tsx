@@ -1,4 +1,4 @@
-import { SearchForm, Title } from "@client/modules/search-form/components";
+import { SearchForm, Title } from "@renderer/modules/search-form/components";
 import { Card } from "@mantine/core";
 
 export const Header = () => {

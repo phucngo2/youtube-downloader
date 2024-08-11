@@ -1,7 +1,7 @@
-import { useDownloadProgress } from "@client/modules/download-modal/hooks";
-import { getDownloadProgressColor } from "@client/modules/download-modal/utils";
+import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
+import { getDownloadProgressColor } from "@renderer/modules/download-modal/utils";
 import { Progress } from "@mantine/core";
-import { DownloadStatusEnum } from "@server/types";
+import { DownloadStatusEnum } from "@main/types";
 import { useMemo } from "react";
 
 export const DownloadProgress = () => {

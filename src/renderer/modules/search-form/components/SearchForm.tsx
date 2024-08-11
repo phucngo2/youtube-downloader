@@ -1,14 +1,14 @@
 import {
   InputFileLocation,
   InputSearch,
-} from "@client/modules/search-form/components";
-import { SEARCH_FORM_CONFIG } from "@client/modules/search-form/config";
+} from "@renderer/modules/search-form/components";
+import { SEARCH_FORM_CONFIG } from "@renderer/modules/search-form/config";
 import {
   useOpenDirDialogMutation,
   useVideoInfoMutation,
-} from "@client/modules/search-form/queries";
-import { ISearchForm } from "@client/modules/search-form/types";
-import { videoInfoAtom } from "@client/stores";
+} from "@renderer/modules/search-form/queries";
+import { ISearchForm } from "@renderer/modules/search-form/types";
+import { videoInfoAtom } from "@renderer/stores";
 import { LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSetAtom } from "jotai";

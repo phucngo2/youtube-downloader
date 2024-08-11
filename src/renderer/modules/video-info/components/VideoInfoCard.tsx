@@ -1,5 +1,5 @@
-import { VideoDownload } from "@client/modules/video-download/components";
-import { VideoDetail } from "@client/modules/video-info/components";
+import { VideoDownload } from "@renderer/modules/video-download/components";
+import { VideoDetail } from "@renderer/modules/video-info/components";
 import { Card } from "@mantine/core";
 
 export const VideoInfoCard = () => {

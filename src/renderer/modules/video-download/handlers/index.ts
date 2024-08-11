@@ -4,8 +4,8 @@ import {
   EVENT_DOWNLOAD_VIDEO,
   EVENT_DOWNLOAD_VIDEO_PROGRESS,
   EVENT_DOWNLOAD_VIDEO_RESULT,
-} from "@server/config";
-import { IDownloadRequest } from "@server/types";
+} from "@main/config";
+import { IDownloadRequest } from "@main/types";
 
 export const sendDownloadVideoEvent = (request: IDownloadRequest): void => {
   window.electron.ipcRenderer.send(EVENT_DOWNLOAD_VIDEO, request);

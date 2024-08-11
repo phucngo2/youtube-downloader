@@ -2,11 +2,11 @@ import {
   ButtonCloseModal,
   CancelDownloadButton,
   DownloadModalControlsSuccess,
-} from "@client/modules/download-modal/components";
-import { useDownloadProgress } from "@client/modules/download-modal/hooks";
+} from "@renderer/modules/download-modal/components";
+import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
 import { Group } from "@mantine/core";
 import { ModalsContextProps } from "@mantine/modals/lib/context";
-import { DownloadStatusEnum } from "@server/types";
+import { DownloadStatusEnum } from "@main/types";
 
 interface Props {
   context: ModalsContextProps;

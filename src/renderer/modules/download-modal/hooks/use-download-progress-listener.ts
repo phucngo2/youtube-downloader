@@ -1,15 +1,15 @@
-import { useIpcListener } from "@client/hooks/use-ipc-listener";
-import { downloadProgressAtom } from "@client/stores";
+import { useIpcListener } from "@renderer/hooks/use-ipc-listener";
+import { downloadProgressAtom } from "@renderer/stores";
 import {
   EVENT_DOWNLOAD_VIDEO_PROGRESS,
   EVENT_DOWNLOAD_VIDEO_RESULT,
   EVENT_DOWNLOADING,
-} from "@server/config";
+} from "@main/config";
 import {
   DownloadStatusEnum,
   IDownloadMessage,
   IDownloadResult,
-} from "@server/types";
+} from "@main/types";
 import { IpcRendererEvent } from "electron";
 import { useSetAtom } from "jotai";
 import { useCallback } from "react";

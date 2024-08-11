@@ -1,4 +1,4 @@
-import { videoInfoAtom } from "@client/stores";
+import { videoInfoAtom } from "@renderer/stores";
 import { ActionIcon, rem, Tooltip } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { IconCopy, IconCopyCheckFilled } from "@tabler/icons-react";

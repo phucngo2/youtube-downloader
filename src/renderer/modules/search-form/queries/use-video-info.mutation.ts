@@ -1,4 +1,4 @@
-import { invokeSearchEvent } from "@client/modules/search-form/handlers";
+import { invokeSearchEvent } from "@renderer/modules/search-form/handlers";
 import { useMutation } from "@tanstack/react-query";
 
 export const useVideoInfoMutation = () => {

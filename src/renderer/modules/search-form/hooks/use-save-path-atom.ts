@@ -1,5 +1,5 @@
-import { savePathAtom } from "@client/stores";
-import { AppStorage } from "@client/utils";
+import { savePathAtom } from "@renderer/stores";
+import { AppStorage } from "@renderer/utils";
 import { useAtom } from "jotai";
 
 export const useSavePathAtom = () => {

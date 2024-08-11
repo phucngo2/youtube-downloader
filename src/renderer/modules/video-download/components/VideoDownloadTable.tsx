@@ -1,6 +1,6 @@
-import { VideoDownloadTableRow } from "@client/modules/video-download/components";
-import { filterFormatList } from "@client/modules/video-download/utils";
-import { videoInfoAtom } from "@client/stores";
+import { VideoDownloadTableRow } from "@renderer/modules/video-download/components";
+import { filterFormatList } from "@renderer/modules/video-download/utils";
+import { videoInfoAtom } from "@renderer/stores";
 import { Table } from "@mantine/core";
 import { useAtomValue } from "jotai";
 import { useMemo } from "react";

@@ -1,5 +1,8 @@
-import { SectionTitle } from "@client/components";
-import { VideoPlayer, VideoTags } from "@client/modules/video-info/components";
+import { SectionTitle } from "@renderer/components";
+import {
+  VideoPlayer,
+  VideoTags,
+} from "@renderer/modules/video-info/components";
 
 export const VideoDetail = () => {
   return (

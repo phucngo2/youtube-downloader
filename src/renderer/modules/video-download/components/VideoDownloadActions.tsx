@@ -1,12 +1,12 @@
-import { useDownloadProgress } from "@client/modules/download-modal/hooks";
+import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
 import {
   sendDownloadAudioEvent,
   sendDownloadVideoEvent,
-} from "@client/modules/video-download/handlers";
-import { savePathAtom, videoInfoAtom } from "@client/stores";
+} from "@renderer/modules/video-download/handlers";
+import { savePathAtom, videoInfoAtom } from "@renderer/stores";
 import { ActionIcon, Group, rem, Tooltip } from "@mantine/core";
 import { modals } from "@mantine/modals";
-import { IVideoFormat } from "@server/types";
+import { IVideoFormat } from "@main/types";
 import { IconDownload, IconPlayerPlayFilled } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { useCallback } from "react";

@@ -1,10 +1,10 @@
-import { useDownloadProgress } from "@client/modules/download-modal/hooks";
-import GifAquaCat from "@client/static/minato-aqua-hololive.gif";
-import { humanFileSize } from "@client/utils";
+import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
+import GifAquaCat from "@renderer/static/minato-aqua-hololive.gif";
+import { humanFileSize } from "@renderer/utils";
 import { Alert } from "@mantine/core";
-import { DownloadStatusEnum } from "@server/types";
+import { DownloadStatusEnum } from "@main/types";
 import { IconExclamationCircle } from "@tabler/icons-react";
-import ImgYouDeer from "@client/static/you-deer.jpg";
+import ImgYouDeer from "@renderer/static/you-deer.jpg";
 
 export const DownloadModalInfo = () => {
   const { downloadProgress } = useDownloadProgress();

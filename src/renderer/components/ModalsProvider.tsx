@@ -1,4 +1,4 @@
-import { DownloadModal } from "@client/modules/download-modal/components";
+import { DownloadModal } from "@renderer/modules/download-modal/components";
 import { ModalsProvider as MaintineModalsProvider } from "@mantine/modals";
 
 interface Props {

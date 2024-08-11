@@ -1,4 +1,4 @@
-import ImgYouDeer from "@client/static/you-deer.jpg";
+import ImgYouDeer from "@renderer/static/you-deer.jpg";
 import { Card } from "@mantine/core";
 
 export const EmptyCard = () => {

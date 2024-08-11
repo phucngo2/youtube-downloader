@@ -1,9 +1,9 @@
-import { ButtonCloseModal } from "@client/modules/download-modal/components";
-import { videoInfoAtom } from "@client/stores";
 import { Button, Group, Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { ButtonCloseModal } from "@renderer/modules/download-modal/components";
+import { invokeCancelDownloadEvent } from "@renderer/modules/download-modal/handlers";
+import { videoInfoAtom } from "@renderer/stores";
 import { useAtomValue } from "jotai";
-import { invokeCancelDownloadEvent } from "../handlers";
 
 interface Props {
   handleClose: () => void;

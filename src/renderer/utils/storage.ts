@@ -1,4 +1,4 @@
-import { STORAGE_KEY_SAVE_PATH } from "@client/config";
+import { STORAGE_KEY_SAVE_PATH } from "@renderer/config";
 
 export const AppStorage = {
   setSavePath(savePath: string) {

@@ -1,7 +1,7 @@
 import {
   downloadProgressAtom,
   downloadProgressAtomInitialValue,
-} from "@client/stores";
+} from "@renderer/stores";
 import { useAtom } from "jotai";
 import { useCallback } from "react";
 

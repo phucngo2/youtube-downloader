@@ -1,6 +1,6 @@
-import { SectionTitle } from "@client/components";
-import { useDownloadProgressListener } from "@client/modules/download-modal/hooks";
-import { VideoDownloadTable } from "@client/modules/video-download/components";
+import { SectionTitle } from "@renderer/components";
+import { useDownloadProgressListener } from "@renderer/modules/download-modal/hooks";
+import { VideoDownloadTable } from "@renderer/modules/video-download/components";
 
 export const VideoDownload = () => {
   useDownloadProgressListener();
