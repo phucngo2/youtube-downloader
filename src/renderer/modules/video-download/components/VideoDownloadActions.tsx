@@ -29,14 +29,16 @@ export const VideoDownloadActions: React.FC<Props> = ({
       modals.openContextModal({
         modal: "downloadModal",
         // Unclosable
-        // closeOnEscape: false,
+        closeOnEscape: false,
         closeOnClickOutside: false,
         withCloseButton: false,
         // Modal location & size
         centered: true,
         size: "lg",
         // Props
-        innerProps: {},
+        innerProps: {
+          itag: videoFormat.itag,
+        },
       }),
     [],
   );
