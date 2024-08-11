@@ -60,8 +60,8 @@ export const VideoDownloadActions: React.FC<Props> = ({
 
   return (
     <Group gap="xs" justify="center" wrap="nowrap">
-      <Tooltip withArrow label="Download" onClick={handleDownload}>
-        <ActionIcon color="teal">
+      <Tooltip withArrow label="Download">
+        <ActionIcon color="teal" onClick={handleDownload}>
           <IconDownload style={{ width: rem(16), height: rem(16) }} />
         </ActionIcon>
       </Tooltip>
