@@ -6,7 +6,6 @@ const unlinkFile = (path: string, retries = 3, delay = 300) => {
       fs.unlink(path, (err) => {
         if (err) {
           if (err.code === "EBUSY" && remainingRetries > 0) {
-            console.log("a");
             setTimeout(() => {
               attempt(remainingRetries - 1);
             }, delay);

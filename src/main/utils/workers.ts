@@ -51,8 +51,10 @@ export const registerWorker = async (
     savePath: request.savePath,
   });
 
-  worker.on("exit", () => {
-    workersMap.delete(workerKey);
+  worker.on("exit", (exitCode: number) => {
+    if (exitCode == 0) {
+      workersMap.delete(workerKey);
+    }
   });
 
   return worker;
