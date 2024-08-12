@@ -1,10 +1,16 @@
 import path from "node:path";
 import { FileExtensions, ISavePathRequest } from "../types";
+import fs from "node:fs";
 
-const pathToFfmpeg = require("ffmpeg-static");
+import pathToFfmpeg from "ffmpeg-static";
 // Fix production issue of ffmpeg-static
 const fixPath = (path: string) => path.replace("app.asar", "app.asar.unpacked");
 export const getFfpmpegPath = (isPackaged: boolean) => {
+  if (!pathToFfmpeg || !fs.existsSync(pathToFfmpeg)) {
+    const message = "FFmpeg not found!";
+    console.error(message);
+    throw new Error(message);
+  }
   if (!isPackaged) {
     return pathToFfmpeg;
   }
