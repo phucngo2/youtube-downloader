@@ -10,6 +10,7 @@ import { IVideoFormat } from "@main/types";
 import { IconDownload, IconPlayerPlayFilled } from "@tabler/icons-react";
 import { useAtomValue } from "jotai";
 import { useCallback } from "react";
+import { AUDIO_CONTAINER } from "@main/config";
 
 interface Props {
   videoFormat: IVideoFormat;
@@ -50,6 +51,7 @@ export const VideoDownloadActions: React.FC<Props> = ({
       url: videoInfo!.videoUrl,
       savePath,
       videoId: videoInfo!.videoId,
+      container: isAudio ? AUDIO_CONTAINER : videoFormat.container,
     };
     if (isAudio) {
       sendDownloadAudioEvent(data);

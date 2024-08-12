@@ -2,6 +2,7 @@ import { ipcMain } from "electron";
 import {
   EVENT_DOWNLOAD_AUDIO,
   EVENT_DOWNLOAD_CANCEL,
+  EVENT_DOWNLOAD_RAW,
   EVENT_DOWNLOAD_VIDEO,
   EVENT_DOWNLOAD_VIDEO_PROGRESS,
   EVENT_DOWNLOAD_VIDEO_RESULT,
@@ -13,10 +14,11 @@ import {
   IDownloadRequest,
   IDownloadResult,
 } from "../types";
-import { registerWorker, unregisterWorker } from "../utils";
+import { getSavePathRaw, registerWorker, unregisterWorker } from "../utils";
 import { getSavePathMp3, getSavePathMp4 } from "../utils";
 import audioDownloadWorkerPath from "../workers/audio-download.worker?modulePath";
 import videoDownloadWorkerPath from "../workers/video-download.worker?modulePath";
+import rawDownloadWorkerPath from "../workers/raw-download.worker?modulePath";
 
 export function registerDownloadHandlers() {
   ipcMain.on(EVENT_DOWNLOAD_VIDEO, (event, request: IDownloadRequest) => {
@@ -47,6 +49,15 @@ export function registerDownloadHandlers() {
       }
     },
   );
+
+  ipcMain.on(EVENT_DOWNLOAD_RAW, async (event, request: IDownloadRequest) => {
+    try {
+      request.savePath = getSavePathRaw(request);
+      handleWorkerDownload(event, request, rawDownloadWorkerPath);
+    } catch (e) {
+      console.error("Error download raw:", e);
+    }
+  });
 }
 
 async function handleWorkerDownload(

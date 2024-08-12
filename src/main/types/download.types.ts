@@ -1,9 +1,14 @@
+import { VideoContainer } from "./ytdl.types";
+
+export type DownloadContainer = VideoContainer | "mp3";
+
 export interface IDownloadRequest {
   url: string;
   itag: number;
   savePath: string;
   videoTitle: string;
   videoId: string;
+  container: DownloadContainer;
 }
 
 export interface IRenderRequest extends IDownloadRequest {

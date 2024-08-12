@@ -1,5 +1,5 @@
 import path from "node:path";
-import { FileExtensions, ISavePathRequest } from "../types";
+import { DownloadContainer, ISavePathRequest } from "../types";
 
 const pathToFfmpeg = require("ffmpeg-static");
 // Fix production issue of ffmpeg-static
@@ -17,23 +17,28 @@ export const removeIllegalCharactersFromFilename = (filename: string) => {
 
 export const getSavePath = (
   request: ISavePathRequest,
-  fileExtension: FileExtensions,
+  fileExtension: DownloadContainer,
 ) => {
-  if (request.savePath.endsWith(fileExtension)) {
+  let fileExtensionWithDot = `.${fileExtension}`;
+  if (request.savePath.endsWith(fileExtensionWithDot)) {
     return request.savePath;
   }
   return path.join(
     request.savePath,
-    `${removeIllegalCharactersFromFilename(request.videoTitle)}${fileExtension}`,
+    `${removeIllegalCharactersFromFilename(request.videoTitle)}${fileExtensionWithDot}`,
   );
 };
 
 export const getSavePathMp4 = (request: ISavePathRequest) => {
-  return getSavePath(request, ".mp4");
+  return getSavePath(request, "mp4");
 };
 
 export const getSavePathMp3 = (request: ISavePathRequest) => {
-  return getSavePath(request, ".mp3");
+  return getSavePath(request, "mp3");
+};
+
+export const getSavePathRaw = (request: ISavePathRequest) => {
+  return getSavePath(request, request.container);
 };
 
 export const getFolderPath = (filePath: string) => {
