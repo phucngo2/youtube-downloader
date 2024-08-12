@@ -1,5 +1,5 @@
 import { electronApp, is, optimizer } from "@electron-toolkit/utils";
-import { app, BrowserWindow, ipcMain, shell } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, shell } from "electron";
 import { join } from "path";
 import icon from "../../resources/icon.png?asset";
 import {
@@ -7,7 +7,8 @@ import {
   registerPathHandlers,
   registerYtdlHandlers,
 } from "./handlers";
-import { cleanupWorkers } from "./utils";
+import { cleanupWorkers, hasProcessingWorkers } from "./utils";
+import { MessageBoxCloseConfig } from "./config";
 
 function createWindow(): void {
   // Create the browser window.
@@ -26,6 +27,15 @@ function createWindow(): void {
 
   mainWindow.on("ready-to-show", () => {
     mainWindow.show();
+  });
+
+  mainWindow.on("close", async (e) => {
+    if (hasProcessingWorkers()) {
+      let res = dialog.showMessageBoxSync(mainWindow, MessageBoxCloseConfig);
+      // Yes index == 0
+      // No index == 1
+      if (res == 1) return e.preventDefault();
+    }
   });
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
