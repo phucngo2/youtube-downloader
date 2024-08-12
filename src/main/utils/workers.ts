@@ -67,6 +67,11 @@ export const cleanupWorkers = async () => {
   }
 };
 
+export const hasProcessingWorkers = () => {
+  const workersMap = WorkersMapSingleton.getInstance();
+  return workersMap.size > 0;
+};
+
 //#region Private
 
 function generateWorkerKey(request: IDownloadCancelRequest): string {
@@ -74,17 +79,21 @@ function generateWorkerKey(request: IDownloadCancelRequest): string {
 }
 
 async function cleanupWorker(workerKey: string) {
-  const workersMap = WorkersMapSingleton.getInstance();
-  const workerMapValue = workersMap.get(workerKey);
+  try {
+    const workersMap = WorkersMapSingleton.getInstance();
+    const workerMapValue = workersMap.get(workerKey);
 
-  if (workerMapValue) {
-    const worker = workerMapValue.worker;
-    const savePath = workerMapValue.savePath;
-    await worker.terminate();
+    if (workerMapValue) {
+      const worker = workerMapValue.worker;
+      const savePath = workerMapValue.savePath;
+      await worker.terminate();
 
-    await tryUnlinkFile(savePath);
+      await tryUnlinkFile(savePath);
 
-    workersMap.delete(workerKey);
+      workersMap.delete(workerKey);
+    }
+  } catch (e) {
+    console.error("Error terminate worker");
   }
 }
 

@@ -56,10 +56,14 @@ async function handleWorkerDownload(
 ) {
   const worker = await registerWorker(request, workerPath);
   worker.on("message", (message: IDownloadMessage | IDownloadResult) => {
-    if ("status" in message) {
-      event.sender.send(EVENT_DOWNLOAD_VIDEO_RESULT, message);
-    } else {
-      event.sender.send(EVENT_DOWNLOAD_VIDEO_PROGRESS, message);
+    try {
+      if ("status" in message) {
+        event.sender.send(EVENT_DOWNLOAD_VIDEO_RESULT, message);
+      } else {
+        event.sender.send(EVENT_DOWNLOAD_VIDEO_PROGRESS, message);
+      }
+    } catch (e) {
+      console.error("Error sending download message: ", e);
     }
   });
   event.sender.send(EVENT_DOWNLOADING);
