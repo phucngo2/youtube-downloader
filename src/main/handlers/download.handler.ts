@@ -8,6 +8,7 @@ import {
   EVENT_DOWNLOADING,
 } from "../config";
 import {
+  DownloadStatusEnum,
   IDownloadCancelRequest,
   IDownloadMessage,
   IDownloadRequest,
@@ -65,6 +66,15 @@ async function handleWorkerDownload(
     } catch (e) {
       console.error("Error sending download message: ", e);
     }
+  });
+
+  worker.on("error", (error) => {
+    console.error("Worker error:", error);
+    const message: IDownloadResult = {
+      status: DownloadStatusEnum.Failed,
+      errorMessage: error.message,
+    };
+    event.sender.send(EVENT_DOWNLOAD_VIDEO_RESULT, message);
   });
   event.sender.send(EVENT_DOWNLOADING);
 }

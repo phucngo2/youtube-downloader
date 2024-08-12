@@ -22,8 +22,10 @@ export const DownloadModalInfo = () => {
           color="red"
           title="Download failed 🥲"
           icon={<IconExclamationCircle />}
+          mah={135}
+          className="overflow-auto"
         >
-          Something went wrong!
+          {downloadProgress.errorMessage || "Something went wrong!"}
         </Alert>
       ) : (
         !!downloadProgress.total && (
