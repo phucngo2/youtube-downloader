@@ -3,6 +3,12 @@ import fs from "node:fs";
 const unlinkFile = (path: string, retries = 3, delay = 300) => {
   return new Promise<void>((resolve, reject) => {
     const attempt = (remainingRetries: number) => {
+      if (!fs.existsSync(path)) {
+        resolve();
+      }
+      if (!fs.lstatSync(path).isFile()) {
+        resolve();
+      }
       fs.unlink(path, (err) => {
         if (err) {
           if (err.code === "EBUSY" && remainingRetries > 0) {
