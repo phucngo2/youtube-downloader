@@ -8,24 +8,24 @@ import {
 } from "../types";
 import { tryUnlinkFile } from "./files";
 
-const WorkersMapSingleton = (function () {
-  let instance: IWorkersMap | undefined;
-  function init() {
-    let workersMap = new Map();
-    return workersMap;
+class WorkersMapSingleton {
+  private static instance: IWorkersMap | undefined;
+  public static getInstance(): IWorkersMap {
+    if (!this.instance) {
+      this.instance = new Map();
+    }
+    return this.instance;
   }
-
-  return {
-    getInstance: function (): IWorkersMap {
-      if (!instance) instance = init();
-      return instance;
-    },
-  };
-})();
+}
 
 export const unregisterWorker = async (request: IDownloadCancelRequest) => {
   const workerKey = generateWorkerKey(request);
-  cleanupWorker(workerKey);
+  const workersMap = WorkersMapSingleton.getInstance();
+  const workerMapValue = workersMap.get(workerKey);
+  if (workerMapValue) {
+    const worker = workerMapValue.worker;
+    await worker.terminate();
+  }
 };
 
 export const registerWorker = async (
@@ -51,10 +51,12 @@ export const registerWorker = async (
     savePath: request.savePath,
   });
 
-  worker.on("exit", (exitCode: number) => {
+  worker.on("exit", async (exitCode: number) => {
     if (exitCode == 0) {
       workersMap.delete(workerKey);
+      return;
     }
+    await cleanupWorker(workerKey);
   });
 
   return worker;
@@ -78,8 +80,16 @@ function generateWorkerKey(request: IDownloadCancelRequest): string {
   return `${request.videoId}-${request.itag}`;
 }
 
+const ongoingCleanups = new Set<string>();
 async function cleanupWorker(workerKey: string) {
+  // If cleanup is already ongoing for this worker, skip it
+  if (ongoingCleanups.has(workerKey)) {
+    return;
+  }
+
   try {
+    ongoingCleanups.add(workerKey);
+
     const workersMap = WorkersMapSingleton.getInstance();
     const workerMapValue = workersMap.get(workerKey);
 
@@ -93,7 +103,9 @@ async function cleanupWorker(workerKey: string) {
       workersMap.delete(workerKey);
     }
   } catch (e) {
-    console.error("Error terminate worker");
+    console.error("Error cleanup worker", e);
+  } finally {
+    ongoingCleanups.delete(workerKey);
   }
 }
 

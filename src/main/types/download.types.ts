@@ -33,6 +33,7 @@ export type DownloadStatus =
 export interface IDownloadResult {
   status: DownloadStatus;
   fullSavePath?: string;
+  errorMessage?: string;
 }
 
 export interface IDownloadCancelRequest {
