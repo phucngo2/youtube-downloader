@@ -1,22 +1,10 @@
-import { VideoDownloadTableRow } from "@renderer/modules/video-download/components";
-import { filterFormatList } from "@renderer/modules/video-download/utils";
-import { videoInfoAtom } from "@renderer/stores";
 import { Table } from "@mantine/core";
-import { useAtomValue } from "jotai";
-import { useMemo } from "react";
 
-export const VideoDownloadTable = () => {
-  const videoInfo = useAtomValue(videoInfoAtom);
+interface Props {
+  rows: JSX.Element[];
+}
 
-  const rows = useMemo(() => {
-    return filterFormatList(videoInfo?.formats || []).map((format, index) => (
-      <VideoDownloadTableRow
-        key={`${index} - ${format.itag}`}
-        videoFormat={format}
-      />
-    ));
-  }, [videoInfo]);
-
+export const VideoDownloadTable: React.FC<Props> = ({ rows }) => {
   return (
     <Table striped highlightOnHover stripedColor="dark">
       <Table.Thead>

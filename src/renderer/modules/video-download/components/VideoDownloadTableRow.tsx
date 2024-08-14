@@ -6,9 +6,13 @@ import { VideoDownloadActions } from "@renderer/modules/video-download/component
 
 interface Props {
   videoFormat: IVideoFormat;
+  isRaw?: boolean;
 }
 
-export const VideoDownloadTableRow: React.FC<Props> = ({ videoFormat }) => {
+export const VideoDownloadTableRow: React.FC<Props> = ({
+  videoFormat,
+  isRaw,
+}) => {
   const isAudio = videoFormat.hasAudio && !videoFormat.hasVideo;
   return (
     <Table.Tr key={videoFormat.itag}>
@@ -32,7 +36,11 @@ export const VideoDownloadTableRow: React.FC<Props> = ({ videoFormat }) => {
       </Table.Td>
       <Table.Td className="text-center">.{videoFormat.container}</Table.Td>
       <Table.Td>
-        <VideoDownloadActions isAudio={isAudio} videoFormat={videoFormat} />
+        <VideoDownloadActions
+          isAudio={isAudio}
+          videoFormat={videoFormat}
+          isRaw={isRaw}
+        />
       </Table.Td>
     </Table.Tr>
   );

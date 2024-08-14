@@ -1,6 +1,7 @@
 import { useDownloadProgress } from "@renderer/modules/download-modal/hooks";
 import {
   sendDownloadAudioEvent,
+  sendDownloadRawEvent,
   sendDownloadVideoEvent,
 } from "@renderer/modules/video-download/handlers";
 import { savePathAtom, videoInfoAtom } from "@renderer/stores";
@@ -15,11 +16,13 @@ import { AUDIO_CONTAINER } from "@main/config";
 interface Props {
   videoFormat: IVideoFormat;
   isAudio: boolean;
+  isRaw?: boolean;
 }
 
 export const VideoDownloadActions: React.FC<Props> = ({
   videoFormat,
   isAudio,
+  isRaw,
 }) => {
   const videoInfo = useAtomValue(videoInfoAtom);
   const savePath = useAtomValue(savePathAtom);
@@ -53,7 +56,9 @@ export const VideoDownloadActions: React.FC<Props> = ({
       videoId: videoInfo!.videoId,
       container: isAudio ? AUDIO_CONTAINER : videoFormat.container,
     };
-    if (isAudio) {
+    if (isRaw) {
+      sendDownloadRawEvent(data);
+    } else if (isAudio) {
       sendDownloadAudioEvent(data);
     } else {
       sendDownloadVideoEvent(data);

@@ -51,7 +51,7 @@ export function registerDownloadHandlers() {
     },
   );
 
-  ipcMain.on(EVENT_DOWNLOAD_RAW, async (event, request: IDownloadRequest) => {
+  ipcMain.on(EVENT_DOWNLOAD_RAW, (event, request: IDownloadRequest) => {
     try {
       request.savePath = getSavePathRaw(request);
       handleWorkerDownload(event, request, rawDownloadWorkerPath);

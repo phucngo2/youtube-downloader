@@ -1,6 +1,7 @@
 import { IpcRendererListener } from "@electron-toolkit/preload";
 import {
   EVENT_DOWNLOAD_AUDIO,
+  EVENT_DOWNLOAD_RAW,
   EVENT_DOWNLOAD_VIDEO,
   EVENT_DOWNLOAD_VIDEO_PROGRESS,
   EVENT_DOWNLOAD_VIDEO_RESULT,
@@ -13,6 +14,10 @@ export const sendDownloadVideoEvent = (request: IDownloadRequest): void => {
 
 export const sendDownloadAudioEvent = (request: IDownloadRequest): void => {
   window.electron.ipcRenderer.send(EVENT_DOWNLOAD_AUDIO, request);
+};
+
+export const sendDownloadRawEvent = (request: IDownloadRequest): void => {
+  window.electron.ipcRenderer.send(EVENT_DOWNLOAD_RAW, request);
 };
 
 export const onDownloadResultEvent = (listener: IpcRendererListener) => {
