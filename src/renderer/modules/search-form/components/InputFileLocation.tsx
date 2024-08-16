@@ -22,7 +22,7 @@ export const InputFileLocation: React.FC<Props> = ({ mutateAsync }) => {
     <TextInput
       placeholder="Paste video id or url here..."
       readOnly
-      className="w-1/2 cursor-pointer min-w-60"
+      className="w-1/2 min-w-60"
       value={savePath}
       leftSection={
         <IconPaperclip
