@@ -14,7 +14,7 @@ export const VideoTagsCopy = () => {
     navigator.clipboard.writeText(videoInfo?.keywords?.join(", ") || "");
     open();
     clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(close, 1000);
+    timeoutRef.current = setTimeout(close, 1200);
   }, [videoInfo, open, close]);
 
   useEffect(() => {
