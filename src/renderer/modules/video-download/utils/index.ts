@@ -14,6 +14,10 @@ function removeDuplicatedItags(formats: IVideoFormat[]): IVideoFormat[] {
   for (let format of formats) {
     if (!uniqueFormats.has(format.itag)) {
       uniqueFormats.set(format.itag, format);
+      continue;
+    }
+    if (format.url.includes("c=IOS")) {
+      uniqueFormats.set(format.itag, format);
     }
   }
 
